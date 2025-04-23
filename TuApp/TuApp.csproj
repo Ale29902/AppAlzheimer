@@ -76,6 +76,9 @@
 	  <Compile Update="RegisterPage.xaml.cs">
 	    <DependentUpon>RegisterPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Vistas\PopUp\PuntajesPopup.xaml.cs">
+	    <DependentUpon>PuntajesPopup.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -155,6 +158,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\PopUp\InsertarOpcionPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Vistas\PopUp\PuntajesPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\PopUp\InsertarPreguntaPopup.xaml">

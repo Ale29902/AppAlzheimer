@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuApp.Vistas.VistasJuegoCuidador.PacientesJuego"
              Title="PacientesJuego">
-
     <Grid RowDefinitions="*, Auto" Padding="20">
-
         <!-- Contenido scrollable -->
         <VerticalStackLayout Grid.Row="0">
             <Label Text="Pacientes Asignados:"
@@ -14,8 +12,7 @@
                    Margin="0,10,0,5"
                    TextColor="Black" />
 
-            <CollectionView ItemsSource="{Binding pacientes}"
-                            Margin="0,0,0,20">
+            <CollectionView ItemsSource="{Binding pacientes}" Margin="0,0,0,20">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#f3e5f5"
@@ -23,15 +20,31 @@
                                CornerRadius="12"
                                Padding="10"
                                Margin="5,5,5,0">
-                            <Label Text="{Binding nombre}"
+                            <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                <!-- Nombre del paciente -->
+                                <Label Grid.Column="0"
+                                   Text="{Binding nombre}"
                                    FontSize="16"
-                                   TextColor="#4a148c" />
+                                   TextColor="#4a148c"
+                                   VerticalOptions="Center" />
+
+                                <Button Grid.Column="1"
+                                    Text="PUNTAJES"
+                                    FontSize="12"
+                                    Padding="10,2"
+                                    BackgroundColor="#7E57C2"
+                                    TextColor="White"
+                                    CornerRadius="16"
+                                    VerticalOptions="Center"
+                                    Clicked="VerPuntajes_Clicked"
+                                    CommandParameter="{Binding .}" />
+
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </VerticalStackLayout>
-
         <!-- Botón fijo abajo -->
         <Button Text="+" 
                 Grid.Row="1"

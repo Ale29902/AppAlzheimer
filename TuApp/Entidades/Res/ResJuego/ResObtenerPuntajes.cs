@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TuApp.Entidades.Res.ResJuego
+namespace TuApp.Entidades
 {
-    internal class ResObtenerPuntajes
+    public class ResObtenerPuntajes : ResBase
     {
+        public List<Puntaje> puntajes { get; set; }
     }
 }

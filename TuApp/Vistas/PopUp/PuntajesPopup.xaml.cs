@@ -1,35 +1,68 @@
 using CommunityToolkit.Maui.Views;
+using Newtonsoft.Json;
+using System.Text;
 using TuApp.Entidades;
-using TuApp.ViewModels;
+using TuApp.Entidades.Entity;
 
 namespace TuApp;
 
-public partial class InsertarPacienteJuegoPopup : Popup
+public partial class PuntajesPopup : Popup
 {
-    private readonly RelacionViewModel viewModel;
-
-    public InsertarPacienteJuegoPopup()
+    public PuntajesPopup(int idPaciente, int idJuego)
     {
         InitializeComponent();
-        viewModel = new RelacionViewModel();
-        BindingContext = viewModel;
+        ObtenerPuntajes(idPaciente, idJuego);
     }
 
-    private void OnPacienteSeleccionado(object sender, SelectionChangedEventArgs e)
+    private async void ObtenerPuntajes(int idPaciente, int idJuego)
     {
-        var paciente = e.CurrentSelection.FirstOrDefault() as Usuario;
 
-        if (paciente != null)
+        ReqObtenerPuntajes req = new ReqObtenerPuntajes
         {
-            
-            Close(paciente); // Devuelve el paciente seleccionado
+            idPaciente = idPaciente,
+            idCuidador = SesionActiva.sesionActiva.usuario.IdUsuario,
+            idJuego = idJuego
+        };
+
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+
+        HttpResponseMessage respuestaHttp = null;
+
+        using (HttpClient httpClient = new HttpClient())
+        {
+            httpClient.BaseAddress = new Uri("https://localhost:44347/api/");
+            respuestaHttp = await httpClient.PostAsync("juego/obtenerpuntaje", jsonContent);
         }
 
-        ((CollectionView)sender).SelectedItem = null;
+        if (respuestaHttp.IsSuccessStatusCode)
+        {
+            var contenido = await respuestaHttp.Content.ReadAsStringAsync();
+            var res = JsonConvert.DeserializeObject<ResObtenerPuntajes>(contenido);
+
+            if (res != null && res.resultado && res.puntajes != null)
+            {
+                if (res.puntajes.Count > 0)
+                {
+                    var listaFormateada = res.puntajes.Select(p =>
+                        $"Puntaje: {p.ValorPuntaje} - Fecha: {p.FechaHora:dd/MM/yyyy}").ToList();
+
+                    collectionPuntajes.ItemsSource = listaFormateada;
+                }
+                else
+                {
+                    collectionPuntajes.ItemsSource = new List<string> { "No hay puntajes registrados." };
+                }
+            }
+            else
+            {
+                collectionPuntajes.ItemsSource = new List<string> { "No se pudieron cargar los puntajes." };
+            }
+        }
     }
 
-    private void OnCerrarClicked(object sender, EventArgs e)
+
+    private void Cerrar_Clicked(object sender, EventArgs e)
     {
-        Close(null);
+        Close();
     }
 }

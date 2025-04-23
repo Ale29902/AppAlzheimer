@@ -1,27 +1,48 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Class="TuApp.InsertarPacienteJuegoPopup"
+    x:Class="TuApp.PuntajesPopup"
     Size="300,400">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
-        <Label Text="Seleccione un paciente"
-               FontSize="18"
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20" RowSpacing="10">
+        <!-- Título -->
+        <Label Text="Puntajes del Paciente"
+               FontSize="20"
+               HorizontalOptions="Center"
                FontAttributes="Bold"
-               HorizontalOptions="Center" />
+               Grid.Row="0" />
 
-        <CollectionView ItemsSource="{Binding Relaciones}" SelectionMode="Single" SelectionChanged="OnPacienteSeleccionado">
+        <!-- Lista de puntajes -->
+        <CollectionView x:Name="collectionPuntajes"
+                        Grid.Row="1"
+                        ItemsSource="{Binding}"
+                        Margin="0"
+                        VerticalOptions="Fill">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="#7E57C2" CornerRadius="10" Margin="0,5">
-                        <Label Text="{Binding Nombre}" Padding="10" TextColor="#4A148C" />
-                    </Frame>
+                    <Border Stroke="#CCC"
+                            StrokeThickness="1"
+                            Padding="8"
+                            Margin="0,0,0,5"
+                            BackgroundColor="White"
+                            StrokeShape="Rectangle"
+                            HorizontalOptions="Fill">
+                        <Label Text="{Binding}"
+                               FontSize="14"
+                               TextColor="Black" />
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Cerrar" Clicked="OnCerrarClicked" />
-    </VerticalStackLayout>
+        <!-- Botón fijo -->
+        <Button Grid.Row="2"
+                Text="Cerrar"
+                Clicked="Cerrar_Clicked"
+                HorizontalOptions="Fill"
+                BackgroundColor="#7E57C2"
+                TextColor="White"
+                FontAttributes="Bold" />
+    </Grid>
 </toolkit:Popup>
