@@ -2,33 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuApp.MainPage">
-
     <ContentPage.Resources>
-        <Color x:Key="primario">#ab3527</Color>
-        <Color x:Key="secundario">#775752</Color>
-        <Color x:Key="tercerario">#705c2e</Color>
+        <ResourceDictionary Source="/Styles/AlzheimerTheme.xaml" />
     </ContentPage.Resources>
-
-    <Grid BackgroundColor="Black">
+    <Grid BackgroundColor="{DynamicResource Gray100}">
         <Frame Margin="10" VerticalOptions="Center">
             <VerticalStackLayout Spacing="15" VerticalOptions="Center">
                 <Label FontAttributes="Bold"
                        FontSize="Large"
                        HorizontalOptions="Center"
+                       TextColor="{DynamicResource PrimaryColor}"
                        Text="Identifícate" />
-
                 <Label Text="Correo electrónico" />
                 <Entry x:Name="txtCorreo" Keyboard="Email" />
-
                 <Label Text="Contraseña" />
                 <Entry x:Name="txtPassword" IsPassword="True" />
-
                 <Button Text="Ingresar"
                         x:Name="btnLogin"
+                        Style="{StaticResource PrimaryButtonStyle}"
                         Clicked="btnLogin_Clicked" />
-
                 <Button Text="Registrarse"
-                        BackgroundColor="Beige"
+                        BackgroundColor="{DynamicResource PrimaryLighterColor}"
                         Clicked="btnRegistrarse_Clicked" />
             </VerticalStackLayout>
         </Frame>

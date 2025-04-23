@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuApp.Styles.CustomAlertDialog"
+             IsVisible="False"
+             BackgroundColor="#80000000">
+    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame BackgroundColor="#5e1675" 
+               BorderColor="#b4b2b1"
+               CornerRadius="15"
+               Padding="20" 
+               WidthRequest="300">
+            <VerticalStackLayout Spacing="20">
+                <!-- Título del diálogo -->
+                <Label x:Name="TitleLabel" 
+                       FontSize="22" 
+                       TextColor="White" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <!-- Mensaje -->
+                <Label x:Name="MessageLabel" 
+                       FontSize="16" 
+                       TextColor="#e2d0ff"
+                       HorizontalOptions="Center" />
+                <!-- Botón -->
+                <Button x:Name="ActionButton"
+                        BackgroundColor="#8a4bcf"
+                        TextColor="White"
+                        FontSize="16"
+                        CornerRadius="10"
+                        HorizontalOptions="Center"
+                        Clicked="OnButtonClicked" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

@@ -3,8 +3,10 @@ namespace TuApp.Vistas;
 
 public partial class InicioPaciente : ContentPage
 {
+
 	public InicioPaciente()
 	{
+
 		InitializeComponent();
         if (SesionActiva.sesionActiva != null && SesionActiva.sesionActiva.usuario != null)
         {

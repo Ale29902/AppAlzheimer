@@ -1,54 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TuApp.Vistas.EliminarPinPacientePage">
-    <!-- Ícono de casa en la esquina superior izquierda -->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Inicio" Clicked="RegresarInicio_Clicked" />
-    </ContentPage.ToolbarItems>
+             x:Class="TuApp.Vistas.EliminarPinPacientePage"
+             BackgroundColor="Transparent">
+
+    <!-- Fondo degradado -->
     <ContentPage.Background>
         <LinearGradientBrush EndPoint="1,1">
-            <GradientStop Color="#a855f7" Offset="0.0" />
-            <GradientStop Color="#6366f1" Offset="1.0" />
+            <GradientStop Color="#5e1675" Offset="0.0" />
+            <GradientStop Color="#9333ea" Offset="0.5" />
+            <GradientStop Color="#3b0764" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
-            <!-- Título centrado -->
-            <Label Text="Eliminar Pin"
+        <VerticalStackLayout Padding="30" Spacing="25">
+
+            <!-- Botón de "Inicio" -->
+            <Button Text="Inicio"
+                    Clicked="RegresarInicio_Clicked"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    Padding="0"
+                    Margin="0,30,0,0" />
+
+            <!-- Título principal -->
+            <Label Text="Eliminar PIN"
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                   TextColor="Black" />
-            <!-- Advertencia -->
-            <Frame Padding="20" Margin="0,10" BackgroundColor="#F8D7DA" BorderColor="#F5C6CB" CornerRadius="10">
-                <Label Text="¡Advertencia! Al eliminar el Pin, se quitará la seguridad de la aplicación."
+                   TextColor="White"
+                   Margin="0,10,0,20" />
+
+            <!-- Mensaje de advertencia -->
+            <Frame Padding="20"
+                   Margin="0,0,0,10"
+                   BackgroundColor="#F8D7DA"
+                   BorderColor="#F5C6CB"
+                   CornerRadius="12">
+                <Label Text="¡Advertencia! Al eliminar el PIN, se quitará la seguridad de la aplicación."
                        FontSize="16"
                        FontAttributes="Bold"
                        TextColor="#721C24"
                        HorizontalTextAlignment="Center" />
             </Frame>
-            <!-- Campo para ingresar el Pin -->
-            <Entry x:Name="PinEntry"
-                   Text="{Binding Pin}"
-                   Placeholder="Ingresa el Pin a eliminar"
-                   TextColor="Black"
-                   BackgroundColor="White"
-                   Margin="0,10"
-                   Keyboard="Numeric"
-                   MaxLength="6"
-                   IsPassword="True"/>
-            <!-- Botón para eliminar el Pin -->
-            <Button Text="Eliminar Pin"
-                    BackgroundColor="DarkRed"
+
+            <!-- Campo de entrada estilizado -->
+            <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                    <Image Source="candado.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="PIN actual" TextColor="White" FontSize="14" />
+                        <Entry x:Name="PinEntry"
+                               Text="{Binding Pin}"
+                               Placeholder="Ingresa el PIN a eliminar"
+                               TextColor="White"
+                               PlaceholderColor="#e2d0ff"
+                               BackgroundColor="#e0cdff"
+                               Keyboard="Numeric"
+                               MaxLength="6"
+                               IsPassword="True" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Botón para eliminar -->
+            <Button Text="Eliminar PIN"
+                    BackgroundColor="#b91c1c"
                     TextColor="White"
                     FontAttributes="Bold"
-                    CornerRadius="10"
+                    CornerRadius="15"
                     HeightRequest="55"
                     Clicked="EliminarPin_Clicked"/>
 
             <!-- Indicador de carga -->
-            <ActivityIndicator IsRunning="{Binding IsLoading}" 
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
                                IsVisible="{Binding IsLoading}"
                                Color="White"
                                HorizontalOptions="Center" />

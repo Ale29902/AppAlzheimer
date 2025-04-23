@@ -1,55 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TuApp.Vistas.GenerarPinPacientePage">
-    <!-- Ícono de casa en la esquina superior izquierda -->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Inicio" Clicked="RegresarInicio_Clicked" />
-    </ContentPage.ToolbarItems>
+             x:Class="TuApp.Vistas.GenerarPinPacientePage"
+             BackgroundColor="Transparent">
+
+    <!-- Fondo degradado -->
     <ContentPage.Background>
         <LinearGradientBrush EndPoint="1,1">
-            <GradientStop Color="#a855f7" Offset="0.0" />
-            <GradientStop Color="#6366f1" Offset="1.0" />
+            <GradientStop Color="#5e1675" Offset="0.0" />
+            <GradientStop Color="#9333ea" Offset="0.5" />
+            <GradientStop Color="#3b0764" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
-            <!-- Título centrado -->
-            <Label Text="Generar Pin"
+        <VerticalStackLayout Padding="30" Spacing="25">
+
+            <!-- Botón "Inicio" -->
+            <Button Text="Inicio"
+                    Clicked="RegresarInicio_Clicked"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    Padding="0"
+                    Margin="0,30,0,0" />
+
+            <!-- Título -->
+            <Label Text="Generar PIN"
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                   TextColor="Black" />
-            <!-- Campo para ingresar el Pin -->
-            <Entry x:Name="PinEntry"
-                   Text="{Binding Pin}"
-                   Placeholder="Ingresa tu nuevo Pin"
-                   TextColor="Black"
-                   BackgroundColor="White"
-                   Margin="0,10"
-                   Keyboard="Numeric"
-                   MaxLength="6"
-                   IsPassword="True"/>
-            <!-- Botón para generar el Pin -->
-            <Button Text="Generar Pin"
-                    BackgroundColor="#3B82F6"
+                   TextColor="White"
+                   Margin="0,10,0,20" />
+
+            <!-- Campo de PIN -->
+            <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                    <Image Source="candado.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="PIN nuevo" TextColor="White" FontSize="14" />
+                        <Entry x:Name="PinEntry"
+                               Text="{Binding Pin}"
+                               Placeholder="Ingresa tu nuevo PIN"
+                               TextColor="White"
+                               PlaceholderColor="#e2d0ff"
+                               BackgroundColor="#e0cdff"
+                               Keyboard="Numeric"
+                               MaxLength="6"
+                               IsPassword="True" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Botón de acción -->
+            <Button Text="Generar PIN"
+                    BackgroundColor="#5e1675"
                     TextColor="White"
                     FontAttributes="Bold"
-                    CornerRadius="10"
+                    CornerRadius="15"
                     HeightRequest="55"
-                    Clicked="GenerarPin_Clicked"/>
+                    Clicked="GenerarPin_Clicked" />
 
-            <!-- Indicador de carga -->
+            <!-- Cargando -->
             <ActivityIndicator IsRunning="{Binding IsLoading}" 
                                IsVisible="{Binding IsLoading}"
                                Color="White"
                                HorizontalOptions="Center" />
 
-            <!-- Mensaje de error (opcional) -->
+            <!-- Mensaje de error -->
             <Label Text="{Binding ErrorMessage}"
                    TextColor="Red"
+                   FontAttributes="Bold"
+                   FontSize="14"
                    IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   Margin="0,10" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

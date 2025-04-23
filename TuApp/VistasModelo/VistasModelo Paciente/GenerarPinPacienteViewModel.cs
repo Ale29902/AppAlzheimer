@@ -8,10 +8,12 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using TuApp.Entidades;
-using TuApp.Entidades.Entity;
 using TuApp.Entidades.Req.ReqUsuario;
 using TuApp.Entidades.Res.ResUsuario;
 using TuApp.Vistas;
+using TuApp.Styles;
+using TuApp.Entidades;
+using TuApp.Entidades.Entity;
 
 namespace TuApp.ViewModels
 {
@@ -56,11 +58,17 @@ namespace TuApp.ViewModels
 
         private readonly INavigation _navigation;
         private readonly Page _page;
+        private readonly CustomAlertDialog _customAlertDialog;
+        private readonly NoChangesDialog _nochangesDialog;
+        private readonly PinDialog _pinDialog;
 
-        public GenerarPinPacienteViewModel(INavigation navigation, Page page)
+        public GenerarPinPacienteViewModel(INavigation navigation, Page page, CustomAlertDialog customAlertDialog, NoChangesDialog nochangesDialog, PinDialog pinDialog)
         {
             _navigation = navigation;
             _page = page;
+            _customAlertDialog = customAlertDialog;
+            _nochangesDialog = nochangesDialog;
+            _pinDialog = pinDialog;
 
             RegresarInicioCommand = new Command(async () => await RegresarInicio());
             GenerarPinCommand = new Command(async () => await GenerarPin());
@@ -77,7 +85,7 @@ namespace TuApp.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(Pin))
                 {
-                    await _page.DisplayAlert("Error", "Debe ingresar un pin", "Aceptar");
+                    await _customAlertDialog.ShowAsync("Campos requeridos", "Debe ingresar un PIN", "Aceptar");
                     return;
                 }
 
@@ -109,22 +117,22 @@ namespace TuApp.ViewModels
                     if (res != null && res.resultado)
                     {
                         SesionActiva.sesionActiva.usuario.pin.Codigo = Pin;
-                        await _page.DisplayAlert("Creación correcta", "Pin generado correctamente", "Aceptar");
+                        await _customAlertDialog.ShowAsync("Creación correcta", "PIN generado correctamente", "Aceptar");
                         await _navigation.PushAsync(new InicioPaciente());
                     }
                     else
                     {
-                        await _page.DisplayAlert("Error generando pin", "Ocurrió un error", "Aceptar");
+                        await _customAlertDialog.ShowAsync("Error generando PIN", "Ocurrió un error", "Aceptar");
                     }
                 }
                 else
                 {
-                    await _page.DisplayAlert("Error de conexión", "No hay respuesta del servidor", "Aceptar");
+                    await _customAlertDialog.ShowAsync("Error de conexión", "No hay respuesta del servidor", "Aceptar");
                 }
             }
             catch (Exception ex)
             {
-                await _page.DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "Aceptar");
+                await _customAlertDialog.ShowAsync("Error", $"Ocurrió un error: {ex.Message}", "Aceptar");
             }
             finally
             {

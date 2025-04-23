@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuApp.Vistas.InicioPaciente"
              BackgroundColor="Transparent">
-
     <ContentPage.Background>
         <LinearGradientBrush EndPoint="1,1">
             <GradientStop Color="#5e1675" Offset="0.0" />
@@ -11,32 +10,149 @@
             <GradientStop Color="#3b0764" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/AlzheimerTheme.xaml" />
 
-    <VerticalStackLayout Padding="20">
+        <!-- Animación para los botones al pulsarlos -->
+        <Style x:Key="MenuTileButtonStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="HeightRequest" Value="120" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Opacity" Value="0.9" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#D8BFD8" />
+                                <Setter Property="Scale" Value="0.95" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
 
-        <!-- Panel superior con bienvenida -->
-        <Frame BackgroundColor="White"
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Panel superior con bienvenida mejorado -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="#8A2BE2" 
                CornerRadius="20"
                Padding="25"
-               Opacity="0.15"
-               HasShadow="False">
-            <Label x:Name="lblBienvenida"
-                   Text="Bienvenido, Usuario"
-                   FontSize="28"
-                   TextColor="White"
-                   HorizontalTextAlignment="Center"
-                   FontAttributes="Bold"/>
+               Opacity="0.85"
+               HasShadow="True"
+               Margin="0,20,0,30">
+            <StackLayout>
+                <Label Text="Bienvenido" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="Center" 
+                       Opacity="0.85"/>
+                <Label x:Name="lblBienvenida"
+                       Text="Carlos Perez"
+                       FontSize="32"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"/>
+            </StackLayout>
         </Frame>
 
-        <!-- Menú de botones -->
-        <VerticalStackLayout Spacing="10">
-            <Button Text="Perfil" Clicked="OnPerfilClicked" BackgroundColor="White" TextColor="Black" />
-            <Button Text="Juegos" Clicked="OnJuegosClicked" BackgroundColor="White" TextColor="Black" />
-            <Button Text="Eventos" Clicked="OnEventosClicked" BackgroundColor="White" TextColor="Black" />
-            <Button Text="Chats" Clicked="OnChatsClicked" BackgroundColor="White" TextColor="Black" />
-            <Button Text="Configuración" Clicked="OnConfiguracionClicked" BackgroundColor="White" TextColor="Black" />
-        </VerticalStackLayout>
+        <!-- Menú de botones estilo Windows 8 -->
+        <Grid Grid.Row="1" ColumnSpacing="15" RowSpacing="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-    </VerticalStackLayout>
+            <!-- Perfil -->
+            <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource MenuTileButtonStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="profile_icon.png" HeightRequest="50" Aspect="AspectFit" />
+                    <Label Grid.Row="1" Text="Perfil" FontSize="18" TextColor="#5e1675" HorizontalOptions="Center" FontAttributes="Bold" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPerfilClicked" />
+                </Frame.GestureRecognizers>
+            </Frame>
 
+            <!-- Juegos -->
+            <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource MenuTileButtonStyle}" BackgroundColor="#9d4cec">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="games_icon.png" HeightRequest="50" Aspect="AspectFit" />
+                    <Label Grid.Row="1" Text="Juegos" FontSize="18" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnJuegosClicked" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Eventos -->
+            <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource MenuTileButtonStyle}" BackgroundColor="#7026b9">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="events_icon.png" HeightRequest="50" Aspect="AspectFit" />
+                    <Label Grid.Row="1" Text="Eventos" FontSize="18" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEventosClicked" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Chats -->
+            <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource MenuTileButtonStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="chat_icon.png" HeightRequest="50" Aspect="AspectFit" />
+                    <Label Grid.Row="1" Text="Chats" FontSize="18" TextColor="#5e1675" HorizontalOptions="Center" FontAttributes="Bold" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnChatsClicked" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Configuración -->
+            <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource MenuTileButtonStyle}" BackgroundColor="#5a1e99">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="settings_icon.png" HeightRequest="50" Aspect="AspectFit" Margin="0,0,15,0" />
+                    <Label Grid.Column="1" Text="Configuración" FontSize="20" TextColor="White" VerticalOptions="Center" FontAttributes="Bold" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnConfiguracionClicked" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+    </Grid>
 </ContentPage>

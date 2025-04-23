@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuApp.Styles.PinDialog"
+             IsVisible="False"
+             BackgroundColor="#80000000">
+    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame BackgroundColor="#5e1675" 
+               BorderColor="#b4b2b1"
+               CornerRadius="15"
+               Padding="20" 
+               WidthRequest="300">
+            <VerticalStackLayout Spacing="20">
+                <!-- Título del diálogo -->
+                <Label Text="PIN Requerido" 
+                       FontSize="22" 
+                       TextColor="White" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <!-- Instrucciones -->
+                <Label Text="Ingresa tu PIN para editar:" 
+                       FontSize="16" 
+                       TextColor="#e2d0ff"
+                       HorizontalOptions="Center" />
+                <!-- Campo de entrada PIN -->
+                <Entry x:Name="PinEntry"
+                       BackgroundColor="#8a4bcf"
+                       TextColor="White"
+                       PlaceholderColor="#e2d0ff"
+                       Placeholder="Ingresa PIN"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       Keyboard="Numeric"
+                       IsPassword="True"
+                       MaxLength="6" />
+                <!-- Línea divisoria -->
+                <BoxView HeightRequest="1" 
+                         BackgroundColor="#b4b2b1"
+                         Margin="0,10" />
+                <!-- Botones -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <Button Text="Aceptar" Grid.Column="0"
+                            BackgroundColor="#8a4bcf"
+                            TextColor="White"
+                            FontSize="16"
+                            CornerRadius="10"
+                            Clicked="OnAcceptClicked" />
+                    <Button Text="Cancelar" Grid.Column="1"
+                            BackgroundColor="#3b0764"
+                            TextColor="White"
+                            FontSize="16"
+                            CornerRadius="10"
+                            Clicked="OnCancelClicked" />
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

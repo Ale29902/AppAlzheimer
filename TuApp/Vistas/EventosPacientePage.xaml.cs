@@ -22,6 +22,10 @@ namespace TuApp.Vistas
             var viewModel = (EventoPacienteViewModel)BindingContext;
             await viewModel.CargarEventosPacienteAsync();
         }
+        private async void RegresarInicio_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new InicioPaciente());
+        }
     }
 
     // Convertidor para mostrar el color según la prioridad

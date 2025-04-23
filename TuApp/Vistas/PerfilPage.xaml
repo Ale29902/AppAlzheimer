@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuApp.Vistas.PerfilPage"
              Title="Perfil">
-   
-    
+
     <ContentPage.Background>
         <LinearGradientBrush EndPoint="1,1">
             <GradientStop Color="#5e1675" Offset="0.0" />
@@ -14,7 +13,7 @@
     </ContentPage.Background>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="25">
 
             <!-- Imagen de perfil -->
             <Frame WidthRequest="120"
@@ -23,7 +22,9 @@
                    IsClippedToBounds="True"
                    Padding="0"
                    BackgroundColor="White"
-                   HorizontalOptions="Center">
+                   HorizontalOptions="Center"
+                   BorderColor="White"
+                   Margin="0,10,0,0">
                 <Image x:Name="imgPerfil"
                        Aspect="AspectFill"
                        WidthRequest="120"
@@ -32,36 +33,117 @@
 
             <!-- Bienvenida -->
             <Label TextColor="White"
-                   FontSize="20"
+                   FontSize="24"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
                    x:Name="lblBienvenida" />
 
             <!-- Datos del usuario -->
-            <Frame BackgroundColor="Black" CornerRadius="20" Padding="20">
-                <VerticalStackLayout Spacing="10">
-                    <Label x:Name="lblNombre" Text="Tu nombre:" IsVisible="True" TextColor="White"/>
-                    <Entry x:Name="txtNombre" Placeholder="Nombre" IsVisible="False" />
+            <VerticalStackLayout Spacing="20">
 
-                    <Label x:Name="lblFecha" Text="Fecha de Nacimiento:" IsVisible="True" TextColor="White"/>
-                    <DatePicker x:Name="dpFechaNacimiento" IsVisible="False" />
+                <!-- Nombre -->
+                <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Image Source="usuario_perfil.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Nombre" TextColor="White" FontSize="14" />
+                            <Label x:Name="lblNombre" TextColor="White" FontSize="16" IsVisible="True"/>
+                            <Entry x:Name="txtNombre" Placeholder="Nombre" IsVisible="False" 
+                                   TextColor="White" PlaceholderColor="#e2d0ff" BackgroundColor="#e0cdff"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
 
-                    <Label x:Name="lblDireccion" Text="Dirección de domicilio:" IsVisible="True" TextColor="White"/>
-                    <Entry x:Name="txtDireccion" Placeholder="Dirección" IsVisible="False" />
+                <!-- Fecha de Nacimiento -->
+                <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Image Source="calendario.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Fecha de Nacimiento" TextColor="White" FontSize="14" />
+                            <Label x:Name="lblFecha" TextColor="White" FontSize="16" IsVisible="True"/>
+                            <DatePicker x:Name="dpFechaNacimiento" IsVisible="False" 
+                                        TextColor="White" BackgroundColor="#e0cdff"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
 
-                    <Label x:Name="lblUbicacion" Text="Código:" TextColor="White"/>
+                <!-- Dirección -->
+                <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Image Source="ubicacion.jpg" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Dirección" TextColor="White" FontSize="14" />
+                            <Label x:Name="lblDireccion" TextColor="White" FontSize="16" IsVisible="True"/>
+                            <Entry x:Name="txtDireccion" Placeholder="Dirección" IsVisible="False" 
+                                   TextColor="White" PlaceholderColor="#e2d0ff" BackgroundColor="#e0cdff"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
 
-                    <Entry x:Name="txtPasswordActual" Placeholder="Contraseña Actual" IsVisible="False" IsPassword="True"/>
-                    <Entry x:Name="txtPasswordNueva" Placeholder="Nueva Contraseña" IsVisible="False" IsPassword="True"/>
-                </VerticalStackLayout>
-            </Frame>
+                <!-- Código / Ubicación -->
+                <Frame x:Name="frameUbicacion" BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Image Source="candado.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Código" TextColor="White" FontSize="14" />
+                            <Label x:Name="lblUbicacion" TextColor="White" FontSize="16"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+              <VerticalStackLayout x:Name="stackCambiarPassword" IsVisible="False" Spacing="20">
 
-            <Button Text="Editar Datos"
-                    x:Name="btnEditar"
-                    BackgroundColor="#7c3aed"
-                    TextColor="White"
-                    Clicked="EditarDatos_Clicked"/>
+                    <!-- Contraseña Actual -->
+                <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Image Source="candado.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Contraseña Actual" TextColor="White" FontSize="14" />
+                   
 
+                                <Entry x:Name="txtPasswordActual" Placeholder="Contraseña Actual" IsPassword="True" 
+                                   TextColor="White" PlaceholderColor="#e2d0ff"  
+                                   BackgroundColor="#e0cdff" ZIndex="1"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Nueva Contraseña -->
+                    <Frame BackgroundColor="#8a4bcf" CornerRadius="15" Padding="15" BorderColor="#b4b2b1">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Image Source="candado.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Nueva Contraseña" TextColor="White" FontSize="14" />
+                            <Entry x:Name="txtPasswordNueva" Placeholder="Nueva Contraseña" IsPassword="True" 
+                                   TextColor="White" PlaceholderColor="#e2d0ff" 
+                                   BackgroundColor="#e0cdff" ZIndex="1" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+              </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+            <!-- Botones -->
+            <VerticalStackLayout Spacing="15">
+                <Button Text="Editar Datos"
+                        x:Name="btnEditar"
+                        BackgroundColor="#8a4bcf"
+                        TextColor="White"
+                        Clicked="EditarDatos_Clicked"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        FontAttributes="Bold"/>
+
+                <Button Text="Volver al Inicio"
+                        x:Name="btnVolver"
+                        BackgroundColor="#a65fe6"
+                        TextColor="White"
+                        Clicked="VolverInicio_Clicked"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        FontAttributes="Bold"
+                        Margin="0,0,0,20"/>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

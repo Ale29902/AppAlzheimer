@@ -8,11 +8,11 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using TuApp.Entidades;
-using TuApp.Entidades.Entity;
 using TuApp.Entidades.Req.ReqUsuario;
 using TuApp.Entidades.Res.ResUsuario;
 using TuApp.Vistas;
-
+using TuApp.Styles;
+using TuApp.Entidades.Entity;
 namespace TuApp.ViewModels
 {
     public class EliminarPinPacienteViewModel : INotifyPropertyChanged
@@ -56,11 +56,17 @@ namespace TuApp.ViewModels
 
         private readonly INavigation _navigation;
         private readonly Page _page;
+        private readonly CustomAlertDialog _customAlertDialog;
+        private readonly NoChangesDialog _nochangesDialog;
+        private readonly PinDialog _pinDialog;
 
-        public EliminarPinPacienteViewModel(INavigation navigation, Page page)
+        public EliminarPinPacienteViewModel(INavigation navigation, Page page, CustomAlertDialog customAlertDialog, NoChangesDialog nochangesDialog, PinDialog pinDialog)
         {
             _navigation = navigation;
             _page = page;
+            _customAlertDialog = customAlertDialog;
+            _nochangesDialog = nochangesDialog;
+            _pinDialog = pinDialog;
 
             RegresarInicioCommand = new Command(async () => await RegresarInicio());
             EliminarPinCommand = new Command(async () => await EliminarPin());
@@ -77,7 +83,7 @@ namespace TuApp.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(Pin))
                 {
-                    await _page.DisplayAlert("Error", "Debe ingresar el pin a eliminar", "Aceptar");
+                    await _customAlertDialog.ShowAsync("Campos requeridos", "Debe ingresar el PIN a eliminar", "Aceptar");
                     return;
                 }
 
@@ -109,22 +115,24 @@ namespace TuApp.ViewModels
                     if (res != null && res.resultado)
                     {
                         SesionActiva.sesionActiva.usuario.pin.Codigo = null;
-                        await _page.DisplayAlert("Eliminación correcta", "Pin eliminado correctamente", "Aceptar");
+                        await _customAlertDialog.ShowAsync("Eliminación correcta", "PIN eliminado correctamente", "Aceptar");
                         await _navigation.PushAsync(new InicioPaciente());
                     }
                     else
                     {
-                        await _page.DisplayAlert("Error eliminando pin", "Pin erróneo", "Aceptar");
+                        // Aquí podrías usar PinDialog para mostrar un PIN incorrecto con estilo
+                        await _customAlertDialog.ShowAsync("PIN incorrecto", "El PIN ingresado es erróneo", "Aceptar");
+                        // await _pinDialog.ShowAsync("Pin incorrecto"); // si lo configuras con ese método
                     }
                 }
                 else
                 {
-                    await _page.DisplayAlert("Error de conexión", "No hay respuesta del servidor", "Aceptar");
+                    await _customAlertDialog.ShowAsync("Error de conexión", "No hay respuesta del servidor", "Aceptar");
                 }
             }
             catch (Exception ex)
             {
-                await _page.DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "Aceptar");
+                await _customAlertDialog.ShowAsync("Error", $"Ocurrió un error: {ex.Message}", "Aceptar");
             }
             finally
             {
@@ -134,7 +142,6 @@ namespace TuApp.ViewModels
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

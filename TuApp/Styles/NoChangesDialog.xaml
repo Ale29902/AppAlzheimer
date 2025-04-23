@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuApp.Styles.NoChangesDialog"
+             IsVisible="False"
+             BackgroundColor="#80000000">
+    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame BackgroundColor="#5e1675" 
+               BorderColor="#b4b2b1"
+               CornerRadius="15"
+               Padding="20" 
+               WidthRequest="300">
+            <VerticalStackLayout Spacing="20">
+                <!-- Título del diálogo -->
+                <Label Text="Sin Cambios" 
+                       FontSize="22" 
+                       TextColor="White" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <!-- Mensaje -->
+                <Label Text="No se ha modificado ningún dato en el perfil." 
+                       FontSize="16" 
+                       TextColor="#e2d0ff"
+                       HorizontalOptions="Center" />
+                <!-- Ícono de información -->
+                <Image Source="info_icon.png"
+                       HeightRequest="48"
+                       WidthRequest="48"
+                       HorizontalOptions="Center" />
+                <!-- Botón -->
+                <Button Text="Entendido"
+                        BackgroundColor="#b4b2b1"
+                        TextColor="Black"
+                        FontSize="16"
+                        CornerRadius="10"
+                        HorizontalOptions="Center"
+                        Clicked="OnButtonClicked" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

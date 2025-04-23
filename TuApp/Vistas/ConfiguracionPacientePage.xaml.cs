@@ -2,6 +2,7 @@ namespace TuApp.Vistas;
 
 public partial class ConfiguracionPacientePage : ContentPage
 {
+
 	public ConfiguracionPacientePage()
 	{
 		InitializeComponent();
@@ -10,10 +11,7 @@ public partial class ConfiguracionPacientePage : ContentPage
     {
         Application.Current.MainPage = new NavigationPage(new InicioPaciente());
     }
-    private async void ActualizarContrasena_Clicked(object sender, EventArgs e)
-    {
-        Application.Current.MainPage = new NavigationPage(new PerfilPage());
-    }
+    
     private async void GenerarPin_Clicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new NavigationPage(new GenerarPinPacientePage());

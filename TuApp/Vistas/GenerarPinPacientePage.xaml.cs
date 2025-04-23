@@ -1,15 +1,31 @@
 using TuApp.ViewModels;
-
+using TuApp.Styles;
 namespace TuApp.Vistas;
 
 public partial class GenerarPinPacientePage : ContentPage
 {
     private GenerarPinPacienteViewModel _viewModel;
-
+    private PinDialog pinDialog;
+    private CustomAlertDialog customAlertDialog;
+    private NoChangesDialog noChangesDialog;
     public GenerarPinPacientePage()
     {
         InitializeComponent();
-        _viewModel = new GenerarPinPacienteViewModel(Navigation, this);
+
+        pinDialog = new PinDialog();
+        customAlertDialog = new CustomAlertDialog();
+        noChangesDialog = new NoChangesDialog();
+
+        var originalContent = Content;
+        var mainGrid = new Grid();
+        mainGrid.Children.Add(originalContent);
+        mainGrid.Children.Add(pinDialog);
+        mainGrid.Children.Add(customAlertDialog);
+        mainGrid.Children.Add(noChangesDialog);
+
+        Content = mainGrid;
+
+        _viewModel = new GenerarPinPacienteViewModel(Navigation, this, customAlertDialog, noChangesDialog, pinDialog);
         BindingContext = _viewModel;
     }
 

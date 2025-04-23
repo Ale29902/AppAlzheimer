@@ -3,7 +3,7 @@ using TuApp.Entidades.Entity;
 using TuApp.Entidades.Req.ReqUsuario;
 using TuApp.Entidades.Res.ResUsuario;
 using TuApp.ViewModels;
-
+using TuApp.Styles;
 using CommunityToolkit.Mvvm.Input;
 
 
@@ -12,12 +12,30 @@ namespace TuApp.Vistas;
 
 public partial class EditarPinPacientePage : ContentPage
 {
+    private PinDialog pinDialog;
+    private CustomAlertDialog customAlertDialog;
+    private NoChangesDialog noChangesDialog;
     private EditarPinPacienteViewModel _viewModel;
 
     public EditarPinPacientePage()
     {
         InitializeComponent();
-        _viewModel = new EditarPinPacienteViewModel(Navigation, this);
+
+    pinDialog = new PinDialog();
+    customAlertDialog = new CustomAlertDialog();
+    noChangesDialog = new NoChangesDialog();
+
+    var originalContent = Content;
+    var mainGrid = new Grid();
+    mainGrid.Children.Add(originalContent);
+    mainGrid.Children.Add(pinDialog);
+    mainGrid.Children.Add(customAlertDialog);
+    mainGrid.Children.Add(noChangesDialog);
+
+    Content = mainGrid;
+
+        _viewModel = new EditarPinPacienteViewModel(Navigation, this, customAlertDialog, noChangesDialog, pinDialog);
+
         BindingContext = _viewModel;
     }
 

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="TuApp.Styles.AlzheimerTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!-- Colores principales - Morados para Alzheimer -->
+    <Color x:Key="PrimaryColor">#8A2BE2</Color>
+    <!-- Morado principal -->
+    <Color x:Key="PrimaryDarkColor">#7026b9</Color>
+    <!-- Morado oscuro -->
+    <Color x:Key="PrimaryDarkenColor">#5a1e99</Color>
+    <!-- Morado más oscuro -->
+    <Color x:Key="PrimaryLighterColor">#9d4cec</Color>
+    <!-- Morado más claro -->
+    <Color x:Key="PrimaryGradient">#9370DB</Color>
+    <!-- Morado medio -->
+    <Color x:Key="PrimaryLight">#D8BFD8</Color>
+    <!-- Morado muy claro -->
+    <Color x:Key="SecondaryColor">#3EB6C4</Color>
+    <!-- Turquesa complementario -->
+
+    <!-- Variaciones con transparencia -->
+    <Color x:Key="Primary50Color">#808A2BE2</Color>
+    <!-- 50% transparencia -->
+    <Color x:Key="Primary40Color">#668A2BE2</Color>
+    <!-- 40% transparencia -->
+    <Color x:Key="Primary35Color">#598A2BE2</Color>
+    <!-- 35% transparencia -->
+    <Color x:Key="Primary20Color">#388A2BE2</Color>
+    <!-- 20% transparencia -->
+    <Color x:Key="Primary10Color">#1A8A2BE2</Color>
+    <!-- 10% transparencia -->
+
+    <!-- Colores de acento y gradiente -->
+    <Color x:Key="SecondaryGradient">#6A5ACD</Color>
+    <!-- Morado azulado -->
+    <Color x:Key="AccentColor">#FFA07A</Color>
+    <!-- Tono salmón como acento -->
+
+    <!-- Grises y colores base -->
+    <Color x:Key="Gray100">#f6f7f8</Color>
+    <Color x:Key="Gray200">#ebecef</Color>
+    <Color x:Key="Gray300">#ced2d9</Color>
+    <Color x:Key="Gray400">#b2b8c2</Color>
+    <Color x:Key="Gray500">#959eac</Color>
+    <Color x:Key="Gray600">#788396</Color>
+    <Color x:Key="Gray700">#606a7b</Color>
+    <Color x:Key="Gray800">#4a515e</Color>
+    <Color x:Key="Gray900">#333942</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="White">#ffffff</Color>
+    <Color x:Key="GrayBg">#ffffff</Color>
+    <Color x:Key="GrayShadowColor">#ffffff</Color>
+    <Color x:Key="GrayShadowBackgroundColor">#ccd2d7</Color>
+
+    <!-- Interfaz de navegación -->
+    <Color x:Key="NavigationBarBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="NavigationBarTextColor">#333942</Color>
+    <Color x:Key="NavigationBarIconColor">#333942</Color>
+    <Color x:Key="MainMenuOverlayBackgroundColor">#22F1F3F5</Color>
+
+    <!-- Colores generales -->
+    <Color x:Key="InverseTextColor">#FFFFFF</Color>
+    <Color x:Key="BaseTextColor">#333942</Color>
+    <Color x:Key="BaseIconColor">#505050</Color>
+    <Color x:Key="BaseLightTextColor">#7B7B7B</Color>
+    <Color x:Key="OverImageTextColor">#FFFFFF</Color>
+    <Color x:Key="BasePageColor">#FFFFFF</Color>
+    <Color x:Key="BaseTabbedPageColor">#FAFAFA</Color>
+    <Color x:Key="MainWrapperBackgroundColor">#eef2f5</Color>
+
+    <!-- Colores complementarios -->
+    <Color x:Key="ComplementColor">#3EB6C4</Color>
+    <Color x:Key="TranslucidBlack">#55000000</Color>
+    <Color x:Key="TranslucidWhite">#11ffffff</Color>
+
+    <!-- Colores indicadores -->
+    <Color x:Key="OkColor">#22C064</Color>
+    <Color x:Key="ErrorColor">#FF392B</Color>
+    <Color x:Key="WarningColor">#FFC107</Color>
+    <Color x:Key="NotificationColor">#8A2BE2</Color>
+    <Color x:Key="DisabledColor">#BBBBBB</Color>
+
+    <!-- Colores de botones -->
+    <Color x:Key="PrimaryActionButtonStartColor">#9d4cec</Color>
+    <Color x:Key="PrimaryActionButtonEndColor">#5a1e99</Color>
+    <Color x:Key="SaveColor">#22C064</Color>
+    <Color x:Key="DeleteColor">#D50000</Color>
+    <Color x:Key="TranslucidButtonColor">#33FFFFFF</Color>
+
+    <!-- Entradas y editores -->
+    <Color x:Key="PlaceholderColor">#7B7B7B</Color>
+    <Color x:Key="EntryAndEditorsBackgroundColor">#f0f0f5</Color>
+    <Color x:Key="EntryAndEditorsBorderColor">#e6e6fa</Color>
+
+    <!-- Menú principal -->
+    <Color x:Key="MainMenuHeaderBackgroundColor">Transparent</Color>
+    <Color x:Key="MainMenuBackgroundColor">Transparent</Color>
+    <Color x:Key="MainMenuSeparatorColor">Transparent</Color>
+    <Color x:Key="MainMenuTextColor">#333942</Color>
+    <Color x:Key="MainMenuIconColor">#333942</Color>
+
+    <!-- Separadores -->
+    <Color x:Key="ListViewSeparatorColor">#D3D3D3</Color>
+    <Color x:Key="BaseSeparatorColor">#7B7B7B</Color>
+    <Color x:Key="FrameBorder">#e6e6fa</Color>
+    <Color x:Key="DefaultBorder">#d0d7de</Color>
+
+    <!-- Estilos de botones -->
+    <Style TargetType="Button">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.97" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryDarkColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{DynamicResource BaseLightTextColor}" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource DisabledColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Estilo para botón primario -->
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="18,14" />
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.97" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryDarkColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{DynamicResource BaseLightTextColor}" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource DisabledColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Estilo para botón secundario -->
+    <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}" />
+        <Setter Property="BorderColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.97" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryLight}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{DynamicResource BaseLightTextColor}" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource DisabledColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Nuevo estilo para menú de azulejos -->
+    <Style x:Key="TileButtonStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryLight}" />
+                            <Setter Property="Scale" Value="0.95" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Estilo para Frame -->
+    <Style TargetType="Frame">
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="BorderColor" Value="{DynamicResource FrameBorder}" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}" />
+    </Style>
+
+    <!-- Estilo para Entry -->
+    <Style TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{DynamicResource EntryAndEditorsBackgroundColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource BaseTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <!-- Estilo para Label -->
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource BaseTextColor}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <!-- Estilo para título grande -->
+    <Style x:Key="TitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <!-- Estilo para subtítulo -->
+    <Style x:Key="SubtitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Opacity" Value="0.85" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+</ResourceDictionary>

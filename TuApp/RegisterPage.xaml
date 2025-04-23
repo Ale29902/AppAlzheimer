@@ -3,34 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuApp.RegisterPage"
              Title="Registro">
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label Text="Nombre" />
-            <Entry x:Name="txtNombre" Placeholder="Nombre completo" />
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/AlzheimerTheme.xaml" />
+    </ContentPage.Resources>
 
-            <Label Text="Correo electrónico" />
-            <Entry x:Name="txtCorreo" Keyboard="Email" />
+    <Grid BackgroundColor="{DynamicResource Gray100}">
+        <ScrollView>
+            <Frame Margin="10" VerticalOptions="Center" Padding="20">
+                <VerticalStackLayout Spacing="15">
 
-            <Label Text="Contraseña" />
-            <Entry x:Name="txtPassword" IsPassword="True" />
+                    <Label FontAttributes="Bold"
+                           FontSize="Large"
+                           HorizontalOptions="Center"
+                           TextColor="{DynamicResource PrimaryColor}"
+                           Text="Registro de usuario" />
 
-            <Label Text="Dirección (opcional)" />
-            <Entry x:Name="txtDireccion" />
+                    <Label Text="Nombre completo" TextColor="{DynamicResource PrimaryColor}" />
+                    <Entry x:Name="txtNombre" Placeholder="Nombre completo" />
 
-            <Label Text="Fecha de nacimiento" />
-            <DatePicker x:Name="dpFechaNacimiento" />
+                    <Label Text="Correo electrónico" TextColor="{DynamicResource PrimaryColor}" />
+                    <Entry x:Name="txtCorreo" Placeholder="Correo electrónico" Keyboard="Email" />
 
-            <Label Text="Tipo de usuario" />
-            <Picker x:Name="pickerTipoUsuario">
-                <Picker.Items>
-                    <x:String>Paciente</x:String>
-                    <x:String>Cuidador</x:String>
-                </Picker.Items>
-            </Picker>
+                    <Label Text="Contraseña" TextColor="{DynamicResource PrimaryColor}" />
+                    <Entry x:Name="txtPassword" Placeholder="Contraseña" IsPassword="True" />
 
-            <Button Text="Registrarse" Clicked="btnRegistrarse_Clicked" />
-            <Button Text="Volver al login" Clicked="btnVolver_Clicked" BackgroundColor="LightGray" />
-        </VerticalStackLayout>
-    </ScrollView>
+                    <Label Text="Dirección (opcional)" TextColor="{DynamicResource PrimaryColor}" />
+                    <Entry x:Name="txtDireccion" Placeholder="Dirección" />
+
+                    <Label Text="Fecha de nacimiento" TextColor="{DynamicResource PrimaryColor}" />
+                    <DatePicker x:Name="dpFechaNacimiento"
+                                BackgroundColor="White"
+                                TextColor="Black"
+                                HeightRequest="45"
+                                Margin="0,0,0,10" />
+
+                    <Label Text="Tipo de usuario" TextColor="{DynamicResource PrimaryColor}" />
+
+                    <Picker x:Name="pickerTipoUsuario"
+        BackgroundColor="#F3F4F6"
+        TextColor="Black"
+        FontSize="16"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Title="Selecciona el tipo de usuario">
+                        <Picker.Items>
+                            <x:String>Paciente</x:String>
+                            <x:String>Cuidador</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+
+
+
+
+
+
+                    <Button Text="Registrarse"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Clicked="btnRegistrarse_Clicked" />
+
+                    <Button Text="Volver al login"
+                            BackgroundColor="{StaticResource PrimaryButtonStyle}"
+                        
+                            Clicked="btnVolver_Clicked" />
+                </VerticalStackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

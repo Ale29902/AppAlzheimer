@@ -1,66 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TuApp.Vistas.ConfiguracionPacientePage">
+             x:Class="TuApp.Vistas.ConfiguracionPacientePage"
+             BackgroundColor="Transparent">
 
-    <!-- Ícono de casa en la esquina superior izquierda -->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Inicio" Clicked="RegresarInicio_Clicked" />
-    </ContentPage.ToolbarItems>
-
+    <!-- Fondo degradado -->
     <ContentPage.Background>
         <LinearGradientBrush EndPoint="1,1">
-            <GradientStop Color="#a855f7" Offset="0.0" />
-            <GradientStop Color="#6366f1" Offset="1.0" />
+            <GradientStop Color="#5e1675" Offset="0.0" />
+            <GradientStop Color="#9333ea" Offset="0.5" />
+            <GradientStop Color="#3b0764" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
 
+    <!-- Recursos y estilos -->
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/AlzheimerTheme.xaml" />
+        <Style x:Key="MenuTileButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#e0cdff" />
+            <Setter Property="TextColor" Value="#3b0764" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="HeightRequest" Value="60" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </ContentPage.Resources>
+
+   
+
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
+            <Button Text="Inicio"
+        Clicked="RegresarInicio_Clicked"
+        TextColor="White"
+        BackgroundColor="Transparent"
+        FontSize="32"
+        FontAttributes="Bold"
+        HorizontalOptions="Start"
+        Margin="30,40,0,0"
+        Padding="0"
+/>
 
-            <Label Text="Configuraciones"
+            <Label Text="Configuración"
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                   TextColor="Black" />
+                   TextColor="White" />
 
-            <Button Text="ACTUALIZAR CONTRASEÑA"
-                    BackgroundColor="#3B82F6"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    CornerRadius="10"
-                    HeightRequest="55"
-                    Clicked="ActualizarContrasena_Clicked"/>
-
-            <Button Text="Editar Pin"
-                    BackgroundColor="#3B82F6"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    CornerRadius="10"
-                    HeightRequest="55"
+            
+            <Button Text="Editar PIN"
+                    Style="{StaticResource MenuTileButtonStyle}"
                     Clicked="EditarPin_Clicked"/>
-            <Button Text="Crear Pin"
-         BackgroundColor="#3B82F6"
-         TextColor="White"
-         FontAttributes="Bold"
-         CornerRadius="10"
-         HeightRequest="55"
-         Clicked="GenerarPin_Clicked"/>
 
-            <Button Text="Eliminar Pin"
-                    BackgroundColor="#3B82F6"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    CornerRadius="10"
-                    HeightRequest="55"
+            <Button Text="Crear PIN"
+                    Style="{StaticResource MenuTileButtonStyle}"
+                    Clicked="GenerarPin_Clicked"/>
+
+            <Button Text="Eliminar PIN"
+                    Style="{StaticResource MenuTileButtonStyle}"
                     Clicked="EliminarPin_Clicked"/>
-            <Button Text="Relacion cuidador"
-          BackgroundColor="#3B82F6"
-          TextColor="White"
-          FontAttributes="Bold"
-          CornerRadius="10"
-          HeightRequest="55"
-          Clicked="RelacionCuidador_Clicked"/>
+
+            <Button Text="Relación con cuidador"
+                    Style="{StaticResource MenuTileButtonStyle}"
+                    Clicked="RelacionCuidador_Clicked"/>
 
         </VerticalStackLayout>
     </ScrollView>

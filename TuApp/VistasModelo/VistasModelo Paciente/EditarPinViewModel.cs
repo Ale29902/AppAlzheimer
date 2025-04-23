@@ -13,7 +13,7 @@ using TuApp.Entidades.Entity;
 using TuApp.Entidades.Req.ReqUsuario;
 using TuApp.Entidades.Res.ResUsuario;
 using TuApp.Vistas;
-
+using TuApp.Styles;
 namespace TuApp.ViewModels
 {
     public class EditarPinPacienteViewModel : INotifyPropertyChanged
@@ -68,15 +68,22 @@ namespace TuApp.ViewModels
 
         private readonly INavigation _navigation;
         private readonly Page _page;
-
-        public EditarPinPacienteViewModel(INavigation navigation, Page page)
+        private readonly CustomAlertDialog _customAlertDialog;
+        private readonly NoChangesDialog _nochangesDialog;
+        private readonly PinDialog _pinDialog;
+        public EditarPinPacienteViewModel(INavigation navigation, Page page, CustomAlertDialog customAlertDialog, NoChangesDialog nochangesDialog, PinDialog pinDialog)
         {
             _navigation = navigation;
             _page = page;
+            _customAlertDialog = customAlertDialog;
+            _nochangesDialog = nochangesDialog;
+            _pinDialog = pinDialog;
 
             RegresarInicioCommand = new Command(async () => await RegresarInicio());
             ActualizarPinCommand = new Command(async () => await ActualizarPin());
         }
+
+     
 
         private async Task RegresarInicio()
         {
@@ -89,19 +96,18 @@ namespace TuApp.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(PinActual) || string.IsNullOrWhiteSpace(NuevoPin))
                 {
-                    await _page.DisplayAlert("Error", "Debe ingresar su pin actual y el nuevo pin", "Aceptar");
+                    await _customAlertDialog.ShowAsync("Campos requeridos", "Debe ingresar su PIN actual y el nuevo PIN", "Aceptar");
                     return;
                 }
 
                 IsLoading = true;
                 ErrorMessage = string.Empty;
 
-                // Corrected request object to match API expectations
                 var req = new
                 {
                     IdUsuario = SesionActiva.sesionActiva.usuario.IdUsuario,
                     PinActual = PinActual.Trim(),
-                    NuevoCodigo = NuevoPin.Trim()  // Changed from NuevoPin to NuevoCodigo
+                    NuevoCodigo = NuevoPin.Trim()
                 };
 
                 var jsonContent = new StringContent(
@@ -112,7 +118,6 @@ namespace TuApp.ViewModels
                 HttpResponseMessage respuestaHttp;
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    // Corrected endpoint URL (assuming 'ping' was a typo)
                     respuestaHttp = await httpClient.PostAsync("https://localhost:44347/api/usuario/actualizarping", jsonContent);
                 }
 
@@ -124,31 +129,30 @@ namespace TuApp.ViewModels
                     if (res != null && res.resultado)
                     {
                         SesionActiva.sesionActiva.usuario.pin.Codigo = NuevoPin;
-                        await _page.DisplayAlert("Actualización correcta", "Pin actualizado correctamente", "Aceptar");
+                        await _customAlertDialog.ShowAsync("Actualización correcta", "PIN actualizado correctamente", "Aceptar");
                         await _navigation.PushAsync(new InicioPaciente());
                     }
                     else
                     {
-                        // Mostrar mensaje más detallado si está disponible
-                        string errorDetail =  "Pin actual erróneo";
-                        await _page.DisplayAlert("Error cambiando pin", errorDetail, "Aceptar");
+                        // También podrías usar PinDialog si quieres algo más visual
+                        await _customAlertDialog.ShowAsync("Error", "PIN actual incorrecto", "Aceptar");
+                        // await _pinDialog.ShowAsync("PIN actual incorrecto"); // si lo tienes implementado
                     }
                 }
                 else
                 {
-                    // Capturar más información del error HTTP
                     string errorContent = await respuestaHttp.Content.ReadAsStringAsync();
                     string errorMessage = $"Error de conexión: {respuestaHttp.StatusCode}";
                     if (!string.IsNullOrEmpty(errorContent))
                     {
                         errorMessage += $"\nDetalle: {errorContent}";
                     }
-                    await _page.DisplayAlert("Error de conexión", errorMessage, "Aceptar");
+                    await _customAlertDialog.ShowAsync("Error de conexión", errorMessage, "Aceptar");
                 }
             }
             catch (Exception ex)
             {
-                await _page.DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "Aceptar");
+                await _customAlertDialog.ShowAsync("Error", $"Ocurrió un error: {ex.Message}", "Aceptar");
             }
             finally
             {
